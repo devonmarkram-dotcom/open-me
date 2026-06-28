@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>You so pretty</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: #ffe6f2;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      color: #ff4d88;
+      font-size: 3rem;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      position: relative;
+      width: 300px;
+      height: 150px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      position: absolute;
+      transition: transform 0.2s ease;
+    }
+
+    #yesBtn {
+      background-color: #4caf50;
+      color: white;
+      left: 40px;
+      top: 40px;
+    }
+
+    #noBtn {
+      background-color: #f44336;
+      color: white;
+      left: 160px;
+      top: 40px;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: rise 1.5s linear forwards;
+    }
+
+    @keyframes rise {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-100px) scale(1.8); }
+    }
+  </style>
+</head>
+<body>
+  <h1>You so pretty 💖</h1>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+
+    // Make NO button run away faster
+    noBtn.addEventListener('mouseenter', () => {
+      const container = document.querySelector('.buttons');
+      const containerRect = container.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const maxX = containerRect.width - btnRect.width;
+      const maxY = containerRect.height - btnRect.height;
+
+      const newX = Math.random() * maxX;
+      const newY = Math.random() * maxY;
+
+      noBtn.style.left = newX + 'px';
+      noBtn.style.top = newY + 'px';
+    });
+
+    // Hearts when clicking YES
+    yesBtn.addEventListener('click', () => {
+      alert('I know right 😌💗');
+
+      for (let i = 0; i < 10; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.textContent = '💖';
+        heart.style.left = (yesBtn.offsetLeft + 40) + 'px';
+        heart.style.top = (yesBtn.offsetTop - 10) + 'px';
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 1500);
+      }
+    });
+  </script>
+</body>
+</html>
